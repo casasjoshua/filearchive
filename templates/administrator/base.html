@@ -1,0 +1,115 @@
+<!-- administrator/base.html -->
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+
+    <!-- Tailwind + Flowbite -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/flowbite@2.3.0/dist/flowbite.min.js"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+    <!-- Sidebar -->
+    <aside class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex justify-center mb-4 -mt-12">
+            <img src="{% static 'logo.png' %}" alt="Logo" class="h-32 w-auto object-contain" />
+        </div>
+        <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a href="{% url 'admin_dashboard_view' %}"
+                    class="flex items-center p-2 rounded-lg
+                            {% if request.resolver_match.url_name == 'admin_dashboard_view' %}
+                                bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white
+                            {% else %}
+                                text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700
+                            {% endif %}">
+                        <!-- Heroicon: Home -->
+                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75h-5.25A.75.75 0 0115 21v-4.5a.75.75 0 00-.75-.75h-3.5a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" />
+                        </svg>
+                        <span class="ml-3">Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- File Archive Link -->
+                <li>
+                    <a href="{% url 'file_archive_view' %}"
+                    class="flex items-center p-2 rounded-lg
+                            {% if request.resolver_match.url_name == 'file_archive_view' %}
+                                bg-gray-100 dark:bg-gray-700 text-blue-600 dark:text-white
+                            {% else %}
+                                text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700
+                            {% endif %}">
+                        <!-- Heroicon: Document -->
+                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h10M7 11h10M7 15h6M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z" />
+                        </svg>
+                        <span class="ml-3">File Archive</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'user_list_view' %}"
+                       class="flex items-center p-2 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Heroicon: Users -->
+                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m5-1.13a4 4 0 100-8 4 4 0 000 8zM17 11a4 4 0 100-8 4 4 0 000 8z" />
+                        </svg>
+                        <span class="ml-3">Users</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#"
+                       class="flex items-center p-2 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Heroicon: Cog -->
+                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15.75A3.75 3.75 0 1115.75 12 3.755 3.755 0 0112 15.75zm7.5-3.75a7.51 7.51 0 00-.88-3.47l1.66-1.66a.75.75 0 00-1.06-1.06l-1.66 1.66a7.51 7.51 0 00-3.47-.88V3a.75.75 0 00-1.5 0v2.44a7.51 7.51 0 00-3.47.88L6.91 4.66a.75.75 0 10-1.06 1.06L7.5 7.38a7.51 7.51 0 00-.88 3.47H3a.75.75 0 000 1.5h2.44a7.51 7.51 0 00.88 3.47L4.66 17.1a.75.75 0 001.06 1.06l1.66-1.66a7.51 7.51 0 003.47.88V21a.75.75 0 001.5 0v-2.44a7.51 7.51 0 003.47-.88l1.66 1.66a.75.75 0 001.06-1.06l-1.66-1.66a7.51 7.51 0 00.88-3.47H21a.75.75 0 000-1.5h-2.44z" />
+                        </svg>
+                        <span class="ml-3">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}"
+                    class="flex items-center p-2 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <!-- Heroicon: Logout -->
+                        <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H5a3 3 0 01-3-3V7a3 3 0 013-3h5a3 3 0 013 3v1" />
+                        </svg>
+                        <span class="ml-3">Logout</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Top Navigation Bar -->
+    <div class="sm:ml-64">
+        <nav class="fixed top-0 z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <div class="px-3 py-3 lg:px-5 lg:pl-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xl font-semibold text-gray-800 dark:text-white">Admin Dashboard</span>
+                    <div class="flex items-center">
+                        <span class="text-sm text-gray-600 dark:text-gray-300 mr-4">Welcome, Admin</span>
+                        <a href="#" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="p-4 mt-20">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+
+</body>
+</html>
